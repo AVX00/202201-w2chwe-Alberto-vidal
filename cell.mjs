@@ -44,7 +44,7 @@ function generateStreet(cellsInTheStreet, acutalStreet) {
   return row;
 }
 
-function greetTheNeighbours(village) {
+export function greetTheNeighbours(village) {
   for (const street of village) {
     for (const cell of street) {
       if (cell.positionX === 0 && cell.positionY === 0) {
@@ -151,12 +151,10 @@ function greetTheNeighbours(village) {
   }
 }
 
-function generateVillage(streetsX, streetsY) {
+export function generateVillage(streetsX, streetsY) {
   const village = [];
   for (let acutalStreet = 0; acutalStreet < streetsX; acutalStreet++) {
     village.push(generateStreet(streetsY, acutalStreet));
   }
   return village;
 }
-
-console.log(greetTheNeighbours(generateVillage(1, 2)));
