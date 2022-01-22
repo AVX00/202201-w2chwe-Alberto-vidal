@@ -37,11 +37,7 @@ class Cell {
 
 function generateStreet(cellsInTheStreet, acutalStreet) {
   const row = [];
-  for (
-    let actualCell = 0;
-    actualCell < cellsInTheStreet;
-    actualCell++
-  ) {
+  for (let actualCell = 0; actualCell < cellsInTheStreet; actualCell++) {
     const cell = new Cell(acutalStreet, actualCell);
     row.push(cell);
   }
@@ -54,7 +50,7 @@ function greetTheNeighbours(village) {
       if (cell.positionX === 0 && cell.positionY === 0) {
         for (let x = cell.positionX; x <= cell.positionX + 1; x++) {
           for (let y = cell.positionY; y <= cell.positionY + 1; y++) {
-            if (village[x][y].isAlive && village[x][y]!== cell) {
+            if (village[x][y].isAlive && village[x][y] !== cell) {
               cell.aliveNeighbours++;
             }
           }
@@ -66,7 +62,7 @@ function greetTheNeighbours(village) {
       ) {
         for (let x = cell.positionX; x <= cell.positionX + 1; x++) {
           for (let y = cell.positionY - 1; y <= cell.positionY + 1; y++) {
-            if (village[x][y].isAlive && village[x][y]!== cell) {
+            if (village[x][y].isAlive && village[x][y] !== cell) {
               cell.aliveNeighbours++;
             }
           }
@@ -74,7 +70,7 @@ function greetTheNeighbours(village) {
       } else if (cell.positionX === 0 && cell.positionY === street.length - 1) {
         for (let x = cell.positionX; x <= cell.positionX + 1; x++) {
           for (let y = cell.positionY - 1; y <= cell.positionY; y++) {
-            if (village[x][y].isAlive && village[x][y]!== cell) {
+            if (village[x][y].isAlive && village[x][y] !== cell) {
               cell.aliveNeighbours++;
             }
           }
@@ -86,7 +82,7 @@ function greetTheNeighbours(village) {
       ) {
         for (let x = cell.positionX - 1; x <= cell.positionX + 1; x++) {
           for (let y = cell.positionY; y <= cell.positionY + 1; y++) {
-            if (village[x][y].isAlive && village[x][y]!== cell) {
+            if (village[x][y].isAlive && village[x][y] !== cell) {
               cell.aliveNeighbours++;
             }
           }
@@ -99,7 +95,7 @@ function greetTheNeighbours(village) {
       ) {
         for (let x = cell.positionX - 1; x <= cell.positionX + 1; x++) {
           for (let y = cell.positionY - 1; y <= cell.positionY + 1; y++) {
-            if (village[x][y].isAlive && village[x][y]!== cell) {
+            if (village[x][y].isAlive && village[x][y] !== cell) {
               cell.aliveNeighbours++;
             }
           }
@@ -107,11 +103,11 @@ function greetTheNeighbours(village) {
       } else if (
         cell.positionX !== 0 &&
         cell.positionX !== village.length - 1 &&
-        cell.positionY === street.length -1
+        cell.positionY === street.length - 1
       ) {
         for (let x = cell.positionX - 1; x <= cell.positionX + 1; x++) {
           for (let y = cell.positionY - 1; y <= cell.positionY; y++) {
-            if (village[x][y].isAlive && village[x][y]!== cell) {
+            if (village[x][y].isAlive && village[x][y] !== cell) {
               cell.aliveNeighbours++;
             }
           }
@@ -122,7 +118,7 @@ function greetTheNeighbours(village) {
       ) {
         for (let x = cell.positionX - 1; x <= cell.positionX; x++) {
           for (let y = cell.positionY; y <= cell.positionY + 1; y++) {
-            if (village[x][y].isAlive && village[x][y]!== cell) {
+            if (village[x][y].isAlive && village[x][y] !== cell) {
               cell.aliveNeighbours++;
             }
           }
@@ -134,7 +130,7 @@ function greetTheNeighbours(village) {
       ) {
         for (let x = cell.positionX - 1; x <= cell.positionX; x++) {
           for (let y = cell.positionY - 1; y <= cell.positionY + 1; y++) {
-            if (village[x][y].isAlive && village[x][y]!== cell) {
+            if (village[x][y].isAlive && village[x][y] !== cell) {
               cell.aliveNeighbours++;
             }
           }
@@ -145,7 +141,7 @@ function greetTheNeighbours(village) {
       ) {
         for (let x = cell.positionX - 1; x <= cell.positionX; x++) {
           for (let y = cell.positionY - 1; y <= cell.positionY; y++) {
-            if (village[x][y].isAlive && village[x][y]!== cell) {
+            if (village[x][y].isAlive && village[x][y] !== cell) {
               cell.aliveNeighbours++;
             }
           }
@@ -162,3 +158,5 @@ function generateVillage(streetsX, streetsY) {
   }
   return village;
 }
+
+console.log(greetTheNeighbours(generateVillage(1, 2)));
