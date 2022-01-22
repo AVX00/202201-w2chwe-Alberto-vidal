@@ -10,3 +10,9 @@ class Cell {
     this.neighbours = neighboursArray;
   }
 }
+
+describe("Given an array of 3 alive cells", () => {
+  describe("When they pass to the next generation", () => {
+    test("Then the middle one should be the only one that survives", () => {});
+  });
+});
