@@ -13,7 +13,10 @@
   "scripts": {
     "prepare": "husky install",
     "test": "jest",
-    "devTest": "jest --watchAll"
+    "devTest": "jest --watchAll",
+    "compile": "sass site/styles/sass/style.sass site/styles/style.css"
   },
-  "dependencies": {}
+  "dependencies": {
+    "sass": "^1.49.0"
+  }
 }
