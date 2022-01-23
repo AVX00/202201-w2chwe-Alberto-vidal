@@ -1,12 +1,16 @@
+
+@use "fonts" 
+
 body
   margin:0
   padding:0
   height: 100vh
   display: flex
   flex-direction: column-reverse
+  font-family: fonts.$font-family
 
 .main
-  height: 90vh
+  height: 93vh
   background-color: #616161
   width: 100vw
   display: flex
@@ -42,11 +46,16 @@ body
 
 
 .menu
-  height: 10vh
+  height: 7vh
   background-color: #272727
   box-shadow: 0 1px 3px 2px #111, 0 -2px 50px 2px #00b6bd
   width: 100vw
+  display: flex
+  justify-content: center
+  align-items: center
   & .start
     padding: 1rem
-    background-color: #060
+    background-color: #003866
+    text-align: center
     cursor: pointer
+    border-radius: 14px
