@@ -1,6 +1,8 @@
 // eslint-disable-next-line import/extensions
 import { generateVillage, greetTheNeighbors } from "./cell.mjs";
 
+let playing = false;
+
 function getNumberOfCells(board) {
   const numberOfCells = [];
   numberOfCells.push(
@@ -12,8 +14,8 @@ function getNumberOfCells(board) {
 
 function bornCell(x, y) {
   const cell = document.createElement("td");
-  cell.setAttribute("id", `cell${x}${y}`);
-  cell.setAttribute("class", "cell");
+  cell.setAttribute("id", `cell-${x}-${y}`);
+  cell.setAttribute("class", "cell cell--dead");
   return cell;
 }
 
@@ -26,48 +28,102 @@ function getCellSize(board, numberOfCells) {
   return cellSize;
 }
 
-function toggleCell(cell, cellSize) {
-  cell.setAttribute(
-    "style",
-    `background-color: #000;width: ${cellSize[0]}px; height: ${cellSize[1]}px;`
-  );
-}
-
 function createCells() {
+  const info = {};
+  const link = [];
   const board = document.getElementById("table");
   board.innerHTML = "";
   const chart = document.createElement("table");
   const numberOfCells = getNumberOfCells(board);
+  const cellSize = getCellSize(board, numberOfCells);
+  const village = generateVillage(numberOfCells[1], numberOfCells[0]);
   for (let x = 0; x < numberOfCells[1]; x++) {
     const row = document.createElement("tr");
     for (let y = 0; y < numberOfCells[0]; y++) {
-      row.appendChild(bornCell(x, y));
+      const cell = bornCell(x, y);
+      cell.setAttribute(
+        "style",
+        `width: ${cellSize[0]}px; height: ${cellSize[1]}px;`
+      );
+      cell.className = "cell cell--dead";
+
+      row.appendChild(cell);
+      link.push({
+        tableCell: cell,
+        villager: village[x][y],
+      });
     }
     chart.appendChild(row);
   }
   board.appendChild(chart);
-  const cellSize = getCellSize(board, numberOfCells);
-  console.log(cellSize);
-  document.querySelectorAll(".cell").forEach((cell) => {
-    cell.setAttribute(
-      "style",
-      `width: ${cellSize[0]}px; height: ${cellSize[1]}px;`
-    );
-    cell.addEventListener("mousedown", () => {
-      toggleCell(cell, cellSize);
-    });
-  });
-
-  const village = generateVillage(numberOfCells[1], numberOfCells[0]);
-  village[0][0].revive();
-  greetTheNeighbors(village);
-  console.log(village);
+  info.link = link;
+  info.village = village;
+  return info;
 }
 
-createCells();
+function addOnclick(dayInfo) {
+  for (const cell of dayInfo) {
+    cell.tableCell.addEventListener("click", () => {
+      if (cell.tableCell.className === "cell cell--dead") {
+        cell.tableCell.className = "cell cell--alive";
+        cell.villager.isAlive = true;
+      } else {
+        cell.tableCell.className = "cell cell--dead";
+        cell.villager.isAlive = false;
+      }
+    });
+  }
+}
 
+function firstDay() {
+  const dayInfo = createCells();
+  console.log(dayInfo);
+  addOnclick(dayInfo.link);
+
+  return dayInfo;
+}
+
+function nextDay(info) {
+  for (const cell of info.link) {
+    if (
+      cell.tableCell.className === "cell cell--dead" &&
+      cell.villager.isAlive
+    ) {
+      cell.tableCell.className = "cell cell--alive";
+    } else if (
+      cell.tableCell.className === "cell cell--alive" &&
+      !cell.villager.isAlive
+    ) {
+      cell.tableCell.className = "cell cell--dead";
+    }
+  }
+  greetTheNeighbors(info.village);
+  for (const cell of info.link) {
+    cell.villager.nextGen();
+  }
+}
+
+function main() {
+  playing = false;
+  let id;
+  const dayInfo = firstDay();
+  const button = document.getElementById("start");
+
+  button.addEventListener("click", () => {
+    console.log(playing);
+    playing = !playing;
+    if (playing) {
+      id = setInterval(() => {
+        nextDay(dayInfo);
+      }, 500);
+    } else {
+      clearInterval(id);
+    }
+  });
+}
 window.onresize = () => {
   setTimeout(() => {
-    createCells();
-  }, 300);
+    main();
+  }, 1000);
 };
+main();
