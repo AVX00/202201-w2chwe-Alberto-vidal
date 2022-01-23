@@ -34,16 +34,17 @@ function toggleCell(tableCell, cell) {
     cell.revive();
     tableCell.className = "cell cell--alive";
   }
+  console.log(tableCell, cell);
 }
 
 function createCells() {
+  const info = [];
   const board = document.getElementById("table");
   board.innerHTML = "";
   const chart = document.createElement("table");
   const numberOfCells = getNumberOfCells(board);
   const cellSize = getCellSize(board, numberOfCells);
   const village = generateVillage(numberOfCells[1], numberOfCells[0]);
-  greetTheNeighbors(village);
   for (let x = 0; x < numberOfCells[1]; x++) {
     const row = document.createElement("tr");
     for (let y = 0; y < numberOfCells[0]; y++) {
@@ -56,16 +57,50 @@ function createCells() {
         toggleCell(cell, village[x][y]);
       });
       row.appendChild(cell);
+      info.push({ tableCell: cell, villager: village[x][y] });
     }
     chart.appendChild(row);
   }
   board.appendChild(chart);
+  return info;
 }
 
-createCells();
+function nextDay() {
+  const dayInfo = createCells();
+  console.log(dayInfo);
+}
+nextDay();
+
+// function refreshStatus(cell, index) {
+//   const cells = document.getElementsByClassName("cell");
+//   if (cell.isAlive) {
+//     cells[index].className = "cell cell--alive";
+//   } else {
+//     cells[index].className = "cell cell--dead";
+//   }
+// }
+
+// function nextDay(village) {
+//   greetTheNeighbors(village);
+//   let index = 0;
+//   for (const street of village) {
+//     for (const cell of street) {
+//       index++;
+//       refreshStatus(cell, index);
+//       cell.nextGen();
+//     }
+//   }
+// }
+
+// function main() {
+//   const button = document.getElementById("start");
+//   const village = createCells();
+//   button.addEventListener("click", () => nextDay(village));
+// }
 
 window.onresize = () => {
   setTimeout(() => {
     createCells();
-  }, 300);
+  }, 1000);
 };
+main();
