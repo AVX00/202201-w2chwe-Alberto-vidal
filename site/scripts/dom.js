@@ -6,8 +6,8 @@ const table = document.getElementById("table");
 function getNumberOfCells(board) {
   const numberOfCells = [];
   numberOfCells.push(
-    Math.floor(board.clientWidth / 30),
-    Math.floor(board.clientHeight / 30)
+    Math.floor(board.clientWidth / 20),
+    Math.floor(board.clientHeight / 20)
   );
   return numberOfCells;
 }
