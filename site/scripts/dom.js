@@ -61,7 +61,7 @@ function createCells() {
   });
 
   const village = generateVillage(numberOfCells[1], numberOfCells[0]);
-  village.greetTheNeighbours();
+  greetTheNeighbours(village);
   console.log(village);
 }
 
