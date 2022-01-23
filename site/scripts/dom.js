@@ -26,17 +26,6 @@ function getCellSize(board, numberOfCells) {
   return cellSize;
 }
 
-function toggleCell(tableCell, cell) {
-  if (cell.isAlive) {
-    cell.die();
-    tableCell.className = "cell cell--dead";
-  } else {
-    cell.revive();
-    tableCell.className = "cell cell--alive";
-  }
-  console.log(tableCell, cell);
-}
-
 function createCells() {
   const info = [];
   const board = document.getElementById("table");
@@ -53,9 +42,7 @@ function createCells() {
         "style",
         `width: ${cellSize[0]}px; height: ${cellSize[1]}px;`
       );
-      cell.addEventListener("mousedown", () => {
-        toggleCell(cell, village[x][y]);
-      });
+
       row.appendChild(cell);
       info.push({ tableCell: cell, villager: village[x][y] });
     }
@@ -65,42 +52,39 @@ function createCells() {
   return info;
 }
 
+function addOnclick(dayInfo) {
+  for (const cell of dayInfo) {
+    cell.tableCell.addEventListener("click", () => {
+      if (cell.tableCell.className === "cell cell--dead") {
+        cell.tableCell.className = "cell cell--alive";
+      } else {
+        cell.tableCell.className = "cell cell--dead";
+      }
+    });
+  }
+}
+
 function nextDay() {
   const dayInfo = createCells();
-  console.log(dayInfo);
+  addOnclick(dayInfo);
+  for (const cell of dayInfo) {
+    if (
+      cell.tableCell.className === "cell cell--dead" &&
+      cell.villager.isAlive
+    ) {
+      cell.tableCell.className = "cell cell--alive";
+    } else if (
+      cell.tableCell.className === "cell cell--alive" &&
+      !cell.villager.isAlive
+    ) {
+      cell.tableCell.className = "cell cell--dead";
+    }
+  }
 }
 nextDay();
-
-// function refreshStatus(cell, index) {
-//   const cells = document.getElementsByClassName("cell");
-//   if (cell.isAlive) {
-//     cells[index].className = "cell cell--alive";
-//   } else {
-//     cells[index].className = "cell cell--dead";
-//   }
-// }
-
-// function nextDay(village) {
-//   greetTheNeighbors(village);
-//   let index = 0;
-//   for (const street of village) {
-//     for (const cell of street) {
-//       index++;
-//       refreshStatus(cell, index);
-//       cell.nextGen();
-//     }
-//   }
-// }
-
-// function main() {
-//   const button = document.getElementById("start");
-//   const village = createCells();
-//   button.addEventListener("click", () => nextDay(village));
-// }
 
 window.onresize = () => {
   setTimeout(() => {
     createCells();
   }, 1000);
 };
-main();
