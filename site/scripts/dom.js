@@ -28,6 +28,13 @@ function getCellSize(board, numberOfCells) {
   return cellSize;
 }
 
+function toggleCell(cell, cellSize) {
+  cell.setAttribute(
+    "style",
+    `background-color: #000;width: ${cellSize[0]}px; height: ${cellSize[1]}px;`
+  );
+}
+
 function createCells(board) {
   const numberOfCells = getNumberOfCells(board);
   for (let x = 0; x < numberOfCells[0]; x++) {
@@ -42,7 +49,9 @@ function createCells(board) {
       "style",
       `width: ${cellSize[0]}px; height: ${cellSize[1]}px;`
     );
-    // cell.addEventListener("click");s
+    cell.addEventListener("mousedown", () => {
+      toggleCell(cell, cellSize);
+    });
   });
 }
 
