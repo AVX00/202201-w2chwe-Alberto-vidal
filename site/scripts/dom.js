@@ -97,7 +97,7 @@ function addOnclick(dayInfo) {
 
 function firstDay() {
   const dayInfo = createCells();
-  console.log(dayInfo);
+
   addOnclick(dayInfo.link);
 
   return dayInfo;
@@ -128,11 +128,7 @@ function main() {
   let id;
   const dayInfo = firstDay();
   const startStop = document.getElementById("start");
-  const reset = document.getElementById("reset");
-  addListener(reset, main);
-
   addListener(startStop, () => {
-    console.log(playing);
     playing = !playing;
     if (playing) {
       id = setInterval(() => {
@@ -143,10 +139,12 @@ function main() {
     }
   });
 }
+
 window.onresize = () => {
   setTimeout(() => {
     main();
   }, 1000);
 };
-console.log(detectMob());
+console.log(addListener);
+
 main();
