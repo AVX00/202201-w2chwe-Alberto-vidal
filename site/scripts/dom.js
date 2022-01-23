@@ -36,13 +36,13 @@ function createCells(board) {
     }
   }
   const cellSize = getCellSize(board, numberOfCells);
-  const cells = document.querySelectorAll(".cell");
-  cells.forEach((cell) => {
+  console.log(cellSize);
+  document.querySelectorAll(".cell").forEach((cell) => {
     cell.setAttribute(
       "style",
       `width: ${cellSize[0]}px; height: ${cellSize[1]}px;`
     );
-    cell.addEventListener("click");
+    // cell.addEventListener("click");s
   });
 }
 
