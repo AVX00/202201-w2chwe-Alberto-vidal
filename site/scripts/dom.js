@@ -1,6 +1,8 @@
 // eslint-disable-next-line import/extensions
 import { generateVillage, greetTheNeighbors } from "./cell.mjs";
 
+let playing = false;
+
 function getNumberOfCells(board) {
   const numberOfCells = [];
   numberOfCells.push(
@@ -27,7 +29,8 @@ function getCellSize(board, numberOfCells) {
 }
 
 function createCells() {
-  const info = [];
+  const info = {};
+  const link = [];
   const board = document.getElementById("table");
   board.innerHTML = "";
   const chart = document.createElement("table");
@@ -42,13 +45,19 @@ function createCells() {
         "style",
         `width: ${cellSize[0]}px; height: ${cellSize[1]}px;`
       );
+      cell.className = "cell cell--dead";
 
       row.appendChild(cell);
-      info.push({ tableCell: cell, villager: village[x][y] });
+      link.push({
+        tableCell: cell,
+        villager: village[x][y],
+      });
     }
     chart.appendChild(row);
   }
   board.appendChild(chart);
+  info.link = link;
+  info.village = village;
   return info;
 }
 
@@ -57,17 +66,25 @@ function addOnclick(dayInfo) {
     cell.tableCell.addEventListener("click", () => {
       if (cell.tableCell.className === "cell cell--dead") {
         cell.tableCell.className = "cell cell--alive";
+        cell.villager.isAlive = true;
       } else {
         cell.tableCell.className = "cell cell--dead";
+        cell.villager.isAlive = false;
       }
     });
   }
 }
 
-function nextDay() {
+function firstDay() {
   const dayInfo = createCells();
-  addOnclick(dayInfo);
-  for (const cell of dayInfo) {
+  console.log(dayInfo);
+  addOnclick(dayInfo.link);
+
+  return dayInfo;
+}
+
+function nextDay(info) {
+  for (const cell of info.link) {
     if (
       cell.tableCell.className === "cell cell--dead" &&
       cell.villager.isAlive
@@ -80,11 +97,37 @@ function nextDay() {
       cell.tableCell.className = "cell cell--dead";
     }
   }
+  greetTheNeighbors(info.village);
+  for (const cell of info.link) {
+    cell.villager.nextGen();
+  }
 }
-nextDay();
 
-window.onresize = () => {
-  setTimeout(() => {
-    createCells();
-  }, 1000);
-};
+function stepsAutomation(dayInfo) {
+  while (playing) {
+    setInterval(() => {
+      nextDay(dayInfo);
+    }, 500);
+  }
+}
+
+function main() {
+  const button = document.getElementById("start");
+  let dayInfo = firstDay();
+  button.addEventListener("click", () => {
+    if (playing) {
+      playing = false;
+    } else {
+      playing = true;
+      stepsAutomation(dayInfo);
+    }
+  });
+
+  window.onresize = () => {
+    setTimeout(() => {
+      dayInfo = firstDay();
+    }, 1000);
+  };
+}
+
+main();
