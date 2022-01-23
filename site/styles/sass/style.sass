@@ -1,5 +1,6 @@
 
 @use "fonts" 
+@use "colors"
 
 body
   margin:0
@@ -11,35 +12,32 @@ body
 
 .main
   height: 93vh
-  background-color: #616161
+  background-color: colors.$lighter-dark
   width: 100vw
   display: flex
   justify-content: center
   align-items: center
   & .table 
-    background-color: #4160b4
     border-radius: 12px
     min-width: 90%
     max-width: 90%
     min-height: 90%
     max-height: 90%
-    border: 5px solid #0f0f0f
+    border: 5px solid colors.$highlight
     display: flex
     overflow: hidden
     flex-wrap: wrap
     & .cell
       box-sizing: border-box
-      
-      border: 1.5px solid #ff00ff
+      border: 1.5px solid colors.$neon
       padding: 0
-      border-radius: 4px
       transition: all .3s ease
       &:hover
-        background-color: #02000031
+        background-color: colors.$highlight
       &--dead
-        background-color: #0084ff
+        background-color: colors.$dark
       &--alive
-        background-color: #000
+        background-color: colors.$alert
         
     & table
       border-collapse: collapse
@@ -47,15 +45,20 @@ body
 
 .menu
   height: 7vh
-  background-color: #272727
-  box-shadow: 0 1px 3px 2px #111, 0 -2px 50px 2px #00b6bd
+  background-color: colors.$dark
+  box-shadow: 0 1px 3px 2px #111, 0 -2px 50px 2px colors.$neon
   width: 100vw
   display: flex
   justify-content: center
   align-items: center
-  & .start
-    padding: 1rem
-    background-color: #003866
+  & .button
+    color: colors.$dark
+    padding: .60rem
+    background-color: colors.$lighter-dark
+    color: colors.$light
     text-align: center
     cursor: pointer
     border-radius: 14px
+    transition: .1s all ease-out
+    &:hover
+      box-shadow: 0 0 10px 1px colors.$neon
