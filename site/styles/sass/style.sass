@@ -3,24 +3,37 @@ body
   padding:0
   height: 100vh
   display: flex
+  flex-direction: column-reverse
 
 .main
-  height: 100vh
+  height: 90vh
   background-color: #616161
-  width: 80vw
+  width: 100vw
   display: flex
   justify-content: center
   align-items: center
   & .table 
-    background-color: #0f0f0f
+    background-color: #4160b4
+    box-sizing: border-box
     border-radius: 12px
-    min-width: 500px
-    min-height: 500px
+    min-width: 90%
+    max-width: 90%
+    min-height: 90%
+    max-height: 90%
     border: 5px solid #0f0f0f
+    display: flex
+    overflow: hidden
+    flex-wrap: wrap
+    & .cell
+      height: --cell-height
+      width: --cell-width
+      box-sizing: border-box
+      background-color: #00ff00
+      border: 1px solid #ff00ff
 
 
 .menu
-  height: 100vh
+  height: 10vh
   background-color: #272727
-  box-shadow: 1px 0 7px 2px #111, -2px 0 50px 2px #00b6bd
-  width: 20vw
+  box-shadow: 0 1px 3px 2px #111, 0 -2px 50px 2px #00b6bd
+  width: 100vw
