@@ -1,8 +1,6 @@
 // eslint-disable-next-line import/extensions
 import { generateVillage, greetTheNeighbors } from "./cell.mjs";
 
-const table = document.getElementById("table");
-
 function getNumberOfCells(board) {
   const numberOfCells = [];
   numberOfCells.push(
@@ -66,10 +64,10 @@ function createCells() {
   console.log(village);
 }
 
-createCells(table);
+createCells();
 
 window.onresize = () => {
   setTimeout(() => {
-    createCells(table);
+    createCells();
   }, 300);
 };
