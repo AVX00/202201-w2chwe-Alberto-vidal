@@ -27,6 +27,26 @@ function getCellSize(board, numberOfCells) {
   );
   return cellSize;
 }
+function detectMob() {
+  const toMatch = [
+    /Android/i,
+    /webOS/i,
+    /iPhone/i,
+    /iPad/i,
+    /iPod/i,
+    /BlackBerry/i,
+    /Windows Phone/i,
+  ];
+
+  return toMatch.some((toMatchItem) => navigator.userAgent.match(toMatchItem));
+}
+function addListener(element, method, ...options) {
+  if (detectMob()) {
+    element.addEventListener("touchstart", () => method(options));
+  } else {
+    element.addEventListener("click", () => method(options));
+  }
+}
 
 function createCells() {
   const info = {};
@@ -63,7 +83,7 @@ function createCells() {
 
 function addOnclick(dayInfo) {
   for (const cell of dayInfo) {
-    cell.tableCell.addEventListener("click", () => {
+    addListener(cell.tableCell, () => {
       if (cell.tableCell.className === "cell cell--dead") {
         cell.tableCell.className = "cell cell--alive";
         cell.villager.isAlive = true;
@@ -109,7 +129,7 @@ function main() {
   const dayInfo = firstDay();
   const button = document.getElementById("start");
 
-  button.addEventListener("click", () => {
+  addListener(button, () => {
     console.log(playing);
     playing = !playing;
     if (playing) {
@@ -126,4 +146,5 @@ window.onresize = () => {
     main();
   }, 1000);
 };
+console.log(detectMob());
 main();
