@@ -10,20 +10,14 @@ class Cell {
   }
 
   nextGen() {
-    switch (this.isAlive) {
-      case true:
-        if (this.aliveNeighbors > 3 || this.aliveNeighbors < 2) {
-          this.die();
-        }
-        break;
-
-      default:
-        if (this.aliveNeighbors === 3) {
-          this.revive();
-        }
-        break;
+    if (this.isAlive) {
+      if (this.aliveNeighbors > 3 || this.aliveNeighbors < 2) {
+        this.die();
+      }
+    } else if (this.aliveNeighbors === 3) {
+      this.revive();
     }
-    this.aliveNeighbors = 0;
+    this.sayGoodNight();
   }
 
   die() {
@@ -38,8 +32,8 @@ class Cell {
     this.aliveNeighbors++;
   }
 
-  sayBye() {
-    this.aliveNeighbors--;
+  sayGoodNight() {
+    this.aliveNeighbors = 0;
   }
 }
 

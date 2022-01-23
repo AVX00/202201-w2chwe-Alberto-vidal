@@ -66,10 +66,10 @@ function createCells() {
   console.log(village);
 }
 
-createCells(table);
+createCells();
 
 window.onresize = () => {
   setTimeout(() => {
-    createCells(table);
+    createCells();
   }, 300);
 };
