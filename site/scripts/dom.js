@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/extensions
-// import { generateVillage, greetTheNeighbours } from "./cell.mjs";
+import { generateVillage, greetTheNeighbours } from "./cell.mjs";
 
 const table = document.getElementById("table");
 
@@ -13,7 +13,7 @@ function getNumberOfCells(board) {
 }
 
 function bornCell(x, y) {
-  const cell = document.createElement("div");
+  const cell = document.createElement("td");
   cell.setAttribute("id", `cell${x}${y}`);
   cell.setAttribute("class", "cell");
   return cell;
@@ -36,12 +36,16 @@ function toggleCell(cell, cellSize) {
 }
 
 function createCells(board) {
+  const chart = document.createElement("table");
   const numberOfCells = getNumberOfCells(board);
-  for (let x = 0; x < numberOfCells[0]; x++) {
-    for (let y = 0; y < numberOfCells[1]; y++) {
-      board.appendChild(bornCell(x, y));
+  for (let x = 0; x < numberOfCells[1]; x++) {
+    const row = document.createElement("tr");
+    for (let y = 0; y < numberOfCells[0]; y++) {
+      row.appendChild(bornCell(x, y));
     }
+    chart.appendChild(row);
   }
+  board.appendChild(chart);
   const cellSize = getCellSize(board, numberOfCells);
   console.log(cellSize);
   document.querySelectorAll(".cell").forEach((cell) => {
@@ -56,3 +60,9 @@ function createCells(board) {
 }
 
 createCells(table);
+
+window.onresize = () => {
+  setTimeout(() => {
+    createCells(table);
+  }, 1000);
+};
