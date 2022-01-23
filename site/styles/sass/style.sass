@@ -46,11 +46,14 @@ body
 .menu
   height: 7vh
   background-color: colors.$dark
-  box-shadow: 0 1px 3px 2px #111, 0 -2px 50px 2px colors.$neon
+  box-shadow: 0 1px 3px 2px #darker, 0 -2px 50px 2px colors.$neon
   width: 100vw
   display: flex
-  justify-content: center
+  justify-content: space-around
   align-items: center
+  & .title 
+    text-shadow: colors.$pink 1px 1px 9px
+    font-size: 20px
   & .button
     color: colors.$dark
     padding: .60rem
@@ -60,5 +63,24 @@ body
     cursor: pointer
     border-radius: 14px
     transition: .1s all ease-out
+    font-size: 13px
     &:hover
       box-shadow: 0 0 10px 1px colors.$neon
+
+@media (min-width: 600px)
+  .menu
+    & .title
+      font-size: 30px
+    & .button
+      font-size: 16px
+  
+
+@media (min-width: 900px)
+  .menu
+    justify-content: space-evenly
+    & .title
+      font-size: 40px
+    & .button
+      font-size: 21px
+  
+
