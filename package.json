@@ -14,7 +14,8 @@
     "prepare": "husky install",
     "test": "jest",
     "devTest": "jest --watchAll",
-    "compile": "sass site/styles/sass/style.sass site/styles/style.css"
+    "compile": "sass site/styles/sass/style.sass site/styles/style.css",
+    "devCompile": "sass --watch site/styles/sass/style.sass site/styles/style.css"
   },
   "dependencies": {
     "sass": "^1.49.0"
