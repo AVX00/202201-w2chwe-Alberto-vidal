@@ -59,6 +59,10 @@ function createCells() {
       toggleCell(cell, cellSize);
     });
   });
+
+  const village = generateVillage(numberOfCells[1], numberOfCells[0]);
+  village.greetTheNeighbours();
+  console.log(village);
 }
 
 createCells(table);
