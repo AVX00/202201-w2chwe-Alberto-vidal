@@ -33,6 +33,14 @@ class Cell {
   revive() {
     this.isAlive = true;
   }
+
+  sayHi() {
+    this.aliveNeighbors++;
+  }
+
+  sayBye() {
+    this.aliveNeighbors--;
+  }
 }
 
 function generateStreet(cellsInTheStreet, acutalStreet) {
@@ -48,7 +56,7 @@ function checkNeighborsTopLeft(cell, village) {
   for (let x = cell.positionX; x <= cell.positionX + 1; x++) {
     for (let y = cell.positionY; y <= cell.positionY + 1; y++) {
       if (village[x][y].isAlive && village[x][y] !== cell) {
-        cell.aliveNeighbors++;
+        cell.sayHi();
       }
     }
   }
@@ -57,7 +65,7 @@ function checkNeighborsTopmidle(cell, village) {
   for (let x = cell.positionX; x <= cell.positionX + 1; x++) {
     for (let y = cell.positionY - 1; y <= cell.positionY + 1; y++) {
       if (village[x][y].isAlive && village[x][y] !== cell) {
-        cell.aliveNeighbors++;
+        cell.sayHi();
       }
     }
   }
@@ -66,7 +74,7 @@ function checkNeighborsTopRight(cell, village) {
   for (let x = cell.positionX; x <= cell.positionX + 1; x++) {
     for (let y = cell.positionY - 1; y <= cell.positionY; y++) {
       if (village[x][y].isAlive && village[x][y] !== cell) {
-        cell.aliveNeighbors++;
+        cell.sayHi();
       }
     }
   }
@@ -75,7 +83,7 @@ function checkNeighborsMiddleLeft(cell, village) {
   for (let x = cell.positionX - 1; x <= cell.positionX + 1; x++) {
     for (let y = cell.positionY; y <= cell.positionY + 1; y++) {
       if (village[x][y].isAlive && village[x][y] !== cell) {
-        cell.aliveNeighbors++;
+        cell.sayHi();
       }
     }
   }
@@ -84,7 +92,7 @@ function checkNeighborsMidleMiddle(cell, village) {
   for (let x = cell.positionX - 1; x <= cell.positionX + 1; x++) {
     for (let y = cell.positionY - 1; y <= cell.positionY + 1; y++) {
       if (village[x][y].isAlive && village[x][y] !== cell) {
-        cell.aliveNeighbors++;
+        cell.sayHi();
       }
     }
   }
@@ -93,7 +101,7 @@ function checkNeighborsMiddleRight(cell, village) {
   for (let x = cell.positionX - 1; x <= cell.positionX + 1; x++) {
     for (let y = cell.positionY - 1; y <= cell.positionY; y++) {
       if (village[x][y].isAlive && village[x][y] !== cell) {
-        cell.aliveNeighbors++;
+        cell.sayHi();
       }
     }
   }
@@ -102,7 +110,7 @@ function checkNeighborsBottomLeft(cell, village) {
   for (let x = cell.positionX - 1; x <= cell.positionX; x++) {
     for (let y = cell.positionY; y <= cell.positionY + 1; y++) {
       if (village[x][y].isAlive && village[x][y] !== cell) {
-        cell.aliveNeighbors++;
+        cell.sayHi();
       }
     }
   }
@@ -111,7 +119,7 @@ function checkNeighborsBottomMiddle(cell, village) {
   for (let x = cell.positionX - 1; x <= cell.positionX; x++) {
     for (let y = cell.positionY - 1; y <= cell.positionY + 1; y++) {
       if (village[x][y].isAlive && village[x][y] !== cell) {
-        cell.aliveNeighbors++;
+        cell.sayHi();
       }
     }
   }
@@ -120,7 +128,7 @@ function checkNeighborsBottomRight(cell, village) {
   for (let x = cell.positionX - 1; x <= cell.positionX; x++) {
     for (let y = cell.positionY - 1; y <= cell.positionY; y++) {
       if (village[x][y].isAlive && village[x][y] !== cell) {
-        cell.aliveNeighbors++;
+        cell.sayHi();
       }
     }
   }
