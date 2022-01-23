@@ -35,7 +35,9 @@ function toggleCell(cell, cellSize) {
   );
 }
 
-function createCells(board) {
+function createCells() {
+  const board = document.getElementById("table");
+  board.innerHTML = "";
   const chart = document.createElement("table");
   const numberOfCells = getNumberOfCells(board);
   for (let x = 0; x < numberOfCells[1]; x++) {
@@ -64,5 +66,5 @@ createCells(table);
 window.onresize = () => {
   setTimeout(() => {
     createCells(table);
-  }, 1000);
+  }, 300);
 };
