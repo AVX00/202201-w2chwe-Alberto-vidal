@@ -25,13 +25,18 @@ body
     flex-wrap: wrap
     & .cell
       box-sizing: border-box
-      background-color: #00ff00
+      
       border: 1.5px solid #ff00ff
       padding: 0
       border-radius: 4px
       transition: all .3s ease
       &:hover
         background-color: #02000031
+      &--dead
+        background-color: #0084ff
+      &--alive
+        background-color: #000
+        
     & table
       border-collapse: collapse
 
