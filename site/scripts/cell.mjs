@@ -1,6 +1,6 @@
 class Cell {
   isAlive = false;
-  aliveNeighbours = 0;
+  aliveNeighbors = 0;
   positionX = 0;
   positionY = 0;
 
@@ -12,18 +12,18 @@ class Cell {
   nextGen() {
     switch (this.isAlive) {
       case true:
-        if (this.aliveNeighbours > 3 || this.aliveNeighbours < 2) {
+        if (this.aliveNeighbors > 3 || this.aliveNeighbors < 2) {
           this.die();
         }
         break;
 
       default:
-        if (this.aliveNeighbours === 3) {
+        if (this.aliveNeighbors === 3) {
           this.revive();
         }
         break;
     }
-    this.aliveNeighbours = 0;
+    this.aliveNeighbors = 0;
   }
 
   die() {
@@ -44,14 +44,14 @@ function generateStreet(cellsInTheStreet, acutalStreet) {
   return row;
 }
 
-export function greetTheNeighbours(village) {
+export function greetTheNeighbors(village) {
   for (const street of village) {
     for (const cell of street) {
       if (cell.positionX === 0 && cell.positionY === 0) {
         for (let x = cell.positionX; x <= cell.positionX + 1; x++) {
           for (let y = cell.positionY; y <= cell.positionY + 1; y++) {
             if (village[x][y].isAlive && village[x][y] !== cell) {
-              cell.aliveNeighbours++;
+              cell.aliveNeighbors++;
             }
           }
         }
@@ -63,7 +63,7 @@ export function greetTheNeighbours(village) {
         for (let x = cell.positionX; x <= cell.positionX + 1; x++) {
           for (let y = cell.positionY - 1; y <= cell.positionY + 1; y++) {
             if (village[x][y].isAlive && village[x][y] !== cell) {
-              cell.aliveNeighbours++;
+              cell.aliveNeighbors++;
             }
           }
         }
@@ -71,7 +71,7 @@ export function greetTheNeighbours(village) {
         for (let x = cell.positionX; x <= cell.positionX + 1; x++) {
           for (let y = cell.positionY - 1; y <= cell.positionY; y++) {
             if (village[x][y].isAlive && village[x][y] !== cell) {
-              cell.aliveNeighbours++;
+              cell.aliveNeighbors++;
             }
           }
         }
@@ -83,7 +83,7 @@ export function greetTheNeighbours(village) {
         for (let x = cell.positionX - 1; x <= cell.positionX + 1; x++) {
           for (let y = cell.positionY; y <= cell.positionY + 1; y++) {
             if (village[x][y].isAlive && village[x][y] !== cell) {
-              cell.aliveNeighbours++;
+              cell.aliveNeighbors++;
             }
           }
         }
@@ -96,7 +96,7 @@ export function greetTheNeighbours(village) {
         for (let x = cell.positionX - 1; x <= cell.positionX + 1; x++) {
           for (let y = cell.positionY - 1; y <= cell.positionY + 1; y++) {
             if (village[x][y].isAlive && village[x][y] !== cell) {
-              cell.aliveNeighbours++;
+              cell.aliveNeighbors++;
             }
           }
         }
@@ -108,7 +108,7 @@ export function greetTheNeighbours(village) {
         for (let x = cell.positionX - 1; x <= cell.positionX + 1; x++) {
           for (let y = cell.positionY - 1; y <= cell.positionY; y++) {
             if (village[x][y].isAlive && village[x][y] !== cell) {
-              cell.aliveNeighbours++;
+              cell.aliveNeighbors++;
             }
           }
         }
@@ -119,7 +119,7 @@ export function greetTheNeighbours(village) {
         for (let x = cell.positionX - 1; x <= cell.positionX; x++) {
           for (let y = cell.positionY; y <= cell.positionY + 1; y++) {
             if (village[x][y].isAlive && village[x][y] !== cell) {
-              cell.aliveNeighbours++;
+              cell.aliveNeighbors++;
             }
           }
         }
@@ -131,7 +131,7 @@ export function greetTheNeighbours(village) {
         for (let x = cell.positionX - 1; x <= cell.positionX; x++) {
           for (let y = cell.positionY - 1; y <= cell.positionY + 1; y++) {
             if (village[x][y].isAlive && village[x][y] !== cell) {
-              cell.aliveNeighbours++;
+              cell.aliveNeighbors++;
             }
           }
         }
@@ -142,7 +142,7 @@ export function greetTheNeighbours(village) {
         for (let x = cell.positionX - 1; x <= cell.positionX; x++) {
           for (let y = cell.positionY - 1; y <= cell.positionY; y++) {
             if (village[x][y].isAlive && village[x][y] !== cell) {
-              cell.aliveNeighbours++;
+              cell.aliveNeighbors++;
             }
           }
         }

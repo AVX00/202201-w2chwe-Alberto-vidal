@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/extensions
-import { generateVillage, greetTheNeighbours } from "./cell.mjs";
+import { generateVillage, greetTheNeighbors } from "./cell.mjs";
 
 const table = document.getElementById("table");
 
@@ -61,7 +61,7 @@ function createCells() {
   });
 
   const village = generateVillage(numberOfCells[1], numberOfCells[0]);
-  greetTheNeighbours(village);
+  greetTheNeighbors(village);
   console.log(village);
 }
 
