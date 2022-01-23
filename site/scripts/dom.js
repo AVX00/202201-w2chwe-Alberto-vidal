@@ -127,9 +127,11 @@ function main() {
   playing = false;
   let id;
   const dayInfo = firstDay();
-  const button = document.getElementById("start");
+  const startStop = document.getElementById("start");
+  const reset = document.getElementById("reset");
+  addListener(reset, main);
 
-  addListener(button, () => {
+  addListener(startStop, () => {
     console.log(playing);
     playing = !playing;
     if (playing) {
