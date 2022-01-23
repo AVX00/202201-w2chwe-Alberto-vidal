@@ -103,31 +103,27 @@ function nextDay(info) {
   }
 }
 
-function stepsAutomation(dayInfo) {
-  while (playing) {
-    setInterval(() => {
-      nextDay(dayInfo);
-    }, 500);
-  }
-}
-
 function main() {
+  playing = false;
+  let id;
+  const dayInfo = firstDay();
   const button = document.getElementById("start");
-  let dayInfo = firstDay();
+
   button.addEventListener("click", () => {
+    console.log(playing);
+    playing = !playing;
     if (playing) {
-      playing = false;
+      id = setInterval(() => {
+        nextDay(dayInfo);
+      }, 500);
     } else {
-      playing = true;
-      stepsAutomation(dayInfo);
+      clearInterval(id);
     }
   });
-
-  window.onresize = () => {
-    setTimeout(() => {
-      dayInfo = firstDay();
-    }, 1000);
-  };
 }
-
+window.onresize = () => {
+  setTimeout(() => {
+    main();
+  }, 1000);
+};
 main();
